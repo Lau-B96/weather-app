@@ -1,5 +1,3 @@
-let currentDate = document.querySelector("#current-date");
-
 let days = [
   "Sunday",
   "Monday",
@@ -7,7 +5,7 @@ let days = [
   "Wednesday",
   "Thursday",
   "Friday",
-  "Saturday"
+  "Saturday",
 ];
 
 let months = [
@@ -22,7 +20,7 @@ let months = [
   "September",
   "October",
   "November",
-  "December"
+  "December",
 ];
 
 let now = new Date();
@@ -36,6 +34,8 @@ if (minutes < 10) {
 } else {
   minutes;
 }
+
+let currentDate = document.querySelector("#current-date");
 
 currentDate.innerHTML = `${weekDay}, ${month} ${date}, ${hour}:${minutes}`;
 

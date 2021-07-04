@@ -47,12 +47,6 @@ a {
   text-decoration: none;
 }
 
-a:active {
-  font-weight: 900;
-  font-size: 30px;
-  color: #295f4e;
-}
-
 hr {
   margin: 2px 10px 10px 10px;
 }
@@ -175,4 +169,14 @@ span.degrees {
 
 .col:hover {
   background: rgba(41, 95, 78, 0.1);
+}
+
+.footer {
+  font-size: 14px;
+  margin: 15px auto;
+  text-align: center;
+}
+
+#github-link {
+  font-weight: bold;
 }

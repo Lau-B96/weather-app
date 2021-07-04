@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x"
+      crossorigin="anonymous"
+    />   
+    <script
+      src="https://kit.fontawesome.com/b31e8ba2f0.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <link rel="stylesheet" href="src/styles.css" />
+    <script src="src/script.js"></script>
+    <title>WeatherApp 🌡️</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1 id="city-heading">Porto</h1>
+      <div class="city-header">
+        <div class="row">
+          <div class="col-6">
+            <h2 id="current-date">Sunday, 30 May, 20:00</h2>
+          </div>
+          <div class="col-4">
+            <form id="city-form">
+              <input
+                type="text"
+                placeholder="Enter a city"
+                autocomplete="off"
+                autofocus="on"
+                id="city-entered"
+              />
+            </form>
+          </div>
+          <div class="col-2">
+            <button id="go-to-button">
+              <i class="fas fa-arrow-circle-right go-to-button"></i>
+            </button>
+            <button id="location-button">
+              <i class="fas fa-map-marker-alt location-button"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <h3>Today</h3>
+      <div class="today">
+        <div class="row">
+          <div class="col-sm-4">
+            <img
+              src="images/partly_cloudy.svg"
+              alt="partly cloudy"
+              class="today-img"
+            />
+            <div class="today-weather">Partly Cloudy</div>
+          </div>
+          <div class="col-sm-8">
+            <div class="row">
+              <div class="col-5 now-title">Now</div>
+              <div class="col-7">
+                <div class="row">
+                  <div class="col-4 now-temp">19</div>
+                  <div class="col-3 degrees">
+                    <div class="row">
+                      <div class="col-6"><a href="#" id="celsius">ºC</a></div>
+                      <div class="col-6">
+                        <a href="#" id="fahrenheit">ºF</a>
+                      </div>
+                    </div>
+                    <div class="row"><div class="col-12"></div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <hr />
+            <div class="row">
+              <div class="col-6 title-today">
+                Max <i class="fas fa-temperature-high"></i>
+              </div>
+
+              <div class="col-6 title-today">
+                Wind <i class="fas fa-wind"></i>
+              </div>
+              
+            </div>
+            <div class="row">
+              <div class="col-6 value-today">
+                <span class="max-temp">20<span><span class="degrees degrees-scale"> ºC</span>
+              </div>
+              <div class="col-6 value-today wind">
+                6 <span class="degrees">km/h</span>
+              </div>
+             
+            </div>
+            <hr class="middle" />
+            <div class="row">
+              <div class="col-6 title-today">
+                Min <i class="fas fa-temperature-low"></i>
+              </div>
+              <div class="col-6 title-today">
+                Humidity <i class="fas fa-tint"></i>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-6 value-today">
+                <span class="min-temp">13<span><span class="degrees degrees-scale">ºC</span>
+              </div>
+              <div class="col-6 value-today humidity">76%</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="next-week">
+        <h3>Next Week</h3>
+
+        <div class="row days">
+          <div class="col">
+            <div class="day-title">MON</div>
+            <img
+              src="images/partly_cloudy.svg"
+              alt="partly cloudy"
+              class="next-week-img"
+            />
+            <span class="degrees next-week-degrees"> 20º | 10º </span>
+          </div>
+          <div class="col">
+            <div class="day-title">TUE</div>
+            <img
+              src="images/partly_cloudy.svg"
+              alt="partly cloudy"
+              class="next-week-img"
+            />
+            <span class="degrees next-week-degrees"> 20º | 10º </span>
+          </div>
+          <div class="col">
+            <div class="day-title">WED</div>
+            <img
+              src="images/partly_cloudy.svg"
+              alt="partly cloudy"
+              class="next-week-img"
+            />
+            <span class="degrees next-week-degrees"> 20º | 10º </span>
+          </div>
+          <div class="col">
+            <div class="day-title">THU</div>
+            <img
+              src="images/partly_cloudy.svg"
+              alt="partly cloudy"
+              class="next-week-img"
+            />
+            <span class="degrees next-week-degrees"> 20º | 10º </span>
+          </div>
+          <div class="col">
+            <div class="day-title">FRI</div>
+            <img
+              src="images/partly_cloudy.svg"
+              alt="partly cloudy"
+              class="next-week-img"
+            />
+            <span class="degrees next-week-degrees"> 20º | 10º </span>
+          </div>
+          <div class="col">
+            <div class="day-title">SAT</div>
+            <img
+              src="images/partly_cloudy.svg"
+              alt="partly cloudy"
+              class="next-week-img"
+            />
+            <span class="degrees next-week-degrees"> 20º | 10º </span>
+          </div>
+          <div class="col">
+            <div class="day-title">SUN</div>
+            <img
+              src="images/partly_cloudy.svg"
+              alt="partly cloudy"
+              class="next-week-img"
+            />
+            <span class="degrees next-week-degrees"> 20º | 10º </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

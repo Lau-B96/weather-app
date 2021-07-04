@@ -1,3 +1,5 @@
+let currentDate = document.querySelector("#current-date");
+
 let days = [
   "Sunday",
   "Monday",
@@ -35,51 +37,31 @@ if (minutes < 10) {
   minutes;
 }
 
-let currentDate = document.querySelector("#current-date");
-
 currentDate.innerHTML = `${weekDay}, ${month} ${date}, ${hour}:${minutes}`;
 
-function showCurrentTemperature(response) {
-  let currentTemperature = Math.round(response.data.main.temp);
-  let temp = document.querySelector(".now-temp");
-  temp.innerHTML = currentTemperature;
-  let tempDescription = document.querySelector(".today-weather");
-  tempDescription.innerHTML = response.data.weather[0].description;
-  let maxTemp = document.querySelector(".max-temp");
-  maxTemp.innerHTML = `${Math.round(response.data.main.temp_max)}ºC`;
-  let minTemp = document.querySelector(".min-temp");
-  minTemp.innerHTML = `${Math.round(response.data.main.temp_min)}ºC`;
-  let wind = document.querySelector(".wind");
-  wind.innerHTML = `${Math.round(response.data.wind.speed)} km/h`;
-  let humidity = document.querySelector(".humidity");
-  humidity.innerHTML = `${Math.round(response.data.main.humidity)}%`;
+function searchCity(cityEntered) {
+  let apiKey = "bba30742206f6fc2ab4952eb606f9aba";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityEntered}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayWeather);
 }
 
-function changeCityName() {
+function searchForCity() {
   event.preventDefault();
   if (document.querySelector("#city-entered").value !== "") {
-    let cityEntered = document.querySelector("#city-entered");
-    cityEntered.trim();
-    let cityHeading = document.querySelector("#city-heading");
-    cityHeading.innerHTML = cityEntered.value;
-
-    let apiKey = "bba30742206f6fc2ab4952eb606f9aba";
-    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityEntered.value}&appid=${apiKey}&units=metric`;
-    axios.get(apiUrl).then(showCurrentTemperature);
+    event.preventDefault();
+    let cityEntered = document.querySelector("#city-entered").value;
+    searchCity(cityEntered);
   } else {
     let h1 = document.querySelector("h1");
     h1.innerHTML = "Please enter a city";
   }
 }
 
-let form = document.querySelector("#city-form");
-form.addEventListener("submit", changeCityName);
-let goToButton = document.querySelector("#go-to-button");
-goToButton.addEventListener("click", changeCityName);
-
-function showCurrentPosition(response) {
+function displayWeather(response) {
   let cityHeading = document.querySelector("#city-heading");
   cityHeading.innerHTML = response.data.name;
+  let cityEntered = document.querySelector("#city-entered");
+  cityEntered.value = "";
   let currentTemperature = Math.round(response.data.main.temp);
   let temp = document.querySelector(".now-temp");
   temp.innerHTML = currentTemperature;
@@ -102,12 +84,19 @@ function showPosition(position) {
   let apiKey = "bba30742206f6fc2ab4952eb606f9aba";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`;
 
-  axios.get(apiUrl).then(showCurrentPosition);
+  axios.get(apiUrl).then(displayWeather);
 }
 
-function currentPosition() {
+function getCurrentPosition() {
   navigator.geolocation.getCurrentPosition(showPosition);
 }
 
+let form = document.querySelector("#city-form");
+form.addEventListener("submit", searchForCity);
+let goToButton = document.querySelector("#go-to-button");
+goToButton.addEventListener("click", searchForCity);
+
 let geoButton = document.querySelector("#location-button");
-geoButton.addEventListener("click", currentPosition);
+geoButton.addEventListener("click", getCurrentPosition);
+
+searchCity("Porto");
